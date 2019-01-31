@@ -46,6 +46,8 @@ app.use(express.static('./site'));
 
 var file_path = '';
 var url_path = '';
+var directory_path = '';
+var directory_count = 0;
 var used_path = '';
 
 function watch_file(fpath) {
@@ -67,6 +69,13 @@ function watch_file(fpath) {
     });
 }
 
+function get_current_directory_file() {
+    var metadatafile = directory_path + '/metadata.json';
+    var metadata = JSON.parse(fs.readFileSync(metadatafile, 'utf8'));
+    var currentfile = metadata["matchordering"][directory_count];
+    return directory_path + '/' + currentfile;
+}
+
 app.get('/replay', function(req, res) {
     if (used_path == 'file') {
         if (file_path == '') {
@@ -82,12 +91,46 @@ app.get('/replay', function(req, res) {
                 resp.pipe(res);
             });
         }
+    } else if (used_path == 'directory') {
+        if (directory_path == '') {
+            res.sendStatus(404);
+        } else {
+            //res.sendFile(directory_path + '/m0ahgrd3iu.bc19');
+            res.sendFile(get_current_directory_file());
+        }
     } else if (used_path == 'upload') {
         res.sendFile(path.join(__dirname, '.tmp_replay'), {dotfiles: 'allow'});
     } else {
         res.sendStatus(404);
     }
 });
+
+
+app.get('/next_replay_in_directory', function(req, res) {
+    if (used_path != 'directory') {
+        res.sendStatus(404);
+    }
+
+    directory_count += 1;
+
+    res.sendStatus(200);
+});
+
+app.get('/replay_metadata', function(req, res) {
+    if (used_path != 'directory') {
+        res.sendStatus(404);
+    }
+    
+    var metadatafile = directory_path + '/metadata.json';
+    var metadata = JSON.parse(fs.readFileSync(metadatafile, 'utf8'));
+
+    var currentfile = metadata["matchordering"][directory_count];
+
+    var m = metadata["matches"][currentfile];
+
+    res.json(m);
+});
+
 
 app.get('/replay_path', function(req, res) {
     if (used_path == 'file') {
@@ -96,6 +139,8 @@ app.get('/replay_path', function(req, res) {
         res.send(url_path);
     } else if (used_path == 'upload') {
         res.send(file_path);
+    } else if (used_path == 'directory') {
+        res.send(get_current_directory_file());
     } else {
         res.sendStatus(404);
     }
@@ -133,7 +178,21 @@ app.get('/set_replay_url', function(req, res) {
     } else {
         res.sendStatus(404);
     }
-})
+});
+
+
+app.get('/set_replay_directory', function(req, res) {
+    var fpath = (new Buffer(req.url.split('?')[1], 'base64')).toString('binary');
+
+    if (fs.existsSync(fpath) && fs.existsSync(fpath + '/metadata.json')) {
+    //if (fs.existsSync(fpath)) {
+        directory_path = fpath;
+        used_path = 'directory';
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(404);
+    }
+});
 
 app.post('/upload_replay', function(req, res) {
     if(req.busboy) {

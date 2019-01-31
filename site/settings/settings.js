@@ -32,6 +32,21 @@ document.getElementById('btn_load_replay_url').onclick = function() {
     });
 }
 
+
+document.getElementById('btn_load_directory').onclick = function() {
+    var filepath = document.getElementById('input_replay_directory').value;
+    var encoded = btoa(filepath);
+
+    fetch('/set_replay_directory?' + encoded).then(function(res){
+        if (res.ok) {
+            console.log('good');
+            window.location.href = '/';
+        } else {
+            alert('Directory not found');
+        }
+    });
+}
+
 document.getElementById('input_replay_file_upload').onchange = function(e) {
     var fname = document.getElementById('input_replay_file_upload').files[0].name;
     document.getElementById('label_replay_upload').innerText = fname;

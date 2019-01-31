@@ -1001,6 +1001,18 @@ function load_replay() {
             });
         }
     });
+
+    fetch('/replay_metadata').then(function(resp) {
+        if (resp.ok) {
+            /*resp.text().then(function(resp) {
+                document.getElementById('replay_path').innerText = resp;
+            });*/
+            resp.json().then(function(resp) {
+                document.getElementById('replay_red_team').innerText = resp['redteam'][1];
+                document.getElementById('replay_blue_team').innerText = resp['blueteam'][1];
+            });
+        }
+    });
 }
 
 load_replay();
@@ -1008,6 +1020,15 @@ load_replay();
 // listen for file updates and reload
 var socket = io();
 socket.on('file_update', load_replay);
+
+
+document.getElementById('btn_next_replay').onclick = function(){
+    fetch('/next_replay_in_directory').then(function(resp) {
+        if (resp.ok) {
+            load_replay();
+        }
+    });
+}
 
 // add click / slider / radio listeners
 document.getElementById('btn_next_turn').onclick = function(){

@@ -1160,6 +1160,18 @@ document.getElementById('btn_toggle_stat_bars').onclick = function(){
     }
 }
 
+document.getElementById('btn_toggle_position_info').onclick = function(){
+    var health = document.getElementById('tooltip-tile');
+
+    console.log(health.style.display);
+
+    if (health.style.display == 'none') {
+        health.style.display = 'block';
+    } else {
+        health.style.display = 'none';
+    }
+}
+
 // toggle autoplay with spacebar
 window.onkeyup = function(e) {
     var key = e.keyCode ? e.keyCode : e.which;

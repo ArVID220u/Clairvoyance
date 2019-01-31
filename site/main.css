@@ -26,6 +26,10 @@ body {
     overflow-y: scroll;
 }
 
+#filler {
+    height: 200px;
+}
+
 #stats {
     position: absolute;
     bottom: 0px;
@@ -199,12 +203,18 @@ p.no-margin {
     position: absolute;
     bottom: 0px;
     left: 0px;
-    padding: 20px;
+    /*padding: 20px;*/
     background-color: rgba(255, 255, 255, 0.9);
     border-top: 2px solid lightcyan;
     border-right: 2px solid lightcyan;
     width: 200px;
     pointer-events: none;
+}
+#tooltip-unit {
+    margin: 20px;
+}
+#tooltip-tile {
+    margin: 20px;
 }
 
 .hidden {

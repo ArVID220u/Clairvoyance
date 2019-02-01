@@ -112,6 +112,27 @@ app.get('/next_replay_in_directory', function(req, res) {
     }
 
     directory_count += 1;
+    
+    var metadatafile = directory_path + '/metadata.json';
+    var metadata = JSON.parse(fs.readFileSync(metadatafile, 'utf8'));
+
+    var leng = metadata['matches'].length;
+
+    if (directory_count >= leng) {
+        directory_count = leng-1;
+    }
+
+    res.sendStatus(200);
+});
+app.get('/previous_replay_in_directory', function(req, res) {
+    if (used_path != 'directory') {
+        res.sendStatus(404);
+    }
+
+    directory_count -= 1;
+    if (directory_count < 0) {
+        directory_count = 0;
+    }
 
     res.sendStatus(200);
 });

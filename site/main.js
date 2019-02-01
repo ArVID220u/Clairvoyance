@@ -1029,6 +1029,13 @@ document.getElementById('btn_next_replay').onclick = function(){
         }
     });
 }
+document.getElementById('btn_previous_replay').onclick = function(){
+    fetch('/previous_replay_in_directory').then(function(resp) {
+        if (resp.ok) {
+            load_replay();
+        }
+    });
+}
 
 // add click / slider / radio listeners
 document.getElementById('btn_next_turn').onclick = function(){

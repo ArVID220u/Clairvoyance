@@ -237,6 +237,27 @@
             </div>
 
             <div class='row pad-row'>
+                <div class='col-auto pr-2 align-self-center'>
+                    <p class='no-margin'>Use</p>
+                </div>
+                <div class='col-auto px-0'>
+                    <div class="btn-group btn-group-toggle btn-group-sm mb-0" id="radio_select_speed_control" data-toggle="buttons">
+                        <label class="btn btn-primary active" id='radio_select_speed_control_rounds_c'>
+                            <input type="radio" name="radio_select_speed_control" id='radio_select_speed_control_rounds' value="rounds" autocomplete="off" checked='true'>
+                            Rounds
+                        </label>
+                        <label class="btn btn-primary" id='radio_select_speed_control_turns_c'>
+                            <input type="radio" name="radio_select_speed_control" id='radio_select_speed_control_turns' value="turns" autocomplete="off">
+                            Turns
+                        </label>
+                    </div>
+                </div>
+                <div class='col-auto pl-2 align-self-center'>
+                    <p class='no-margin'>for speed control</p>
+                </div>
+            </div>
+
+            <div class='row pad-row'>
                 <div class='col-3 align-self-center'>
                     <p class='no-margin'>Speed:</p>
                 </div>
@@ -253,12 +274,12 @@
                 </div>
                 <div class='col-auto px-0'>
                     <div class="btn-group btn-group-toggle btn-group-sm mb-0" id="radio_select_input_type" data-toggle="buttons">
-                        <label class="btn btn-primary active">
-                            <input type="radio" name="radio_select_input_type" value="number" autocomplete="off" checked>
+                        <label class="btn btn-primary active" id='radio_select_input_type_number_c'>
+                            <input type="radio" name="radio_select_input_type" value="number" id='radio_select_input_type_number' autocomplete="off" checked='true'>
                             Numbers
                         </label>
-                        <label class="btn btn-primary">
-                            <input type="radio" name="radio_select_input_type" value="range" autocomplete="off">
+                        <label class="btn btn-primary" id='radio_select_input_type_range_c'>
+                            <input type="radio" name="radio_select_input_type" value="range" id='radio_select_input_type_range' autocomplete="off">
                             Sliders
                         </label>
                     </div>

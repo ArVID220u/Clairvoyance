@@ -155,6 +155,8 @@ class Veww {
         // viewer state
         this.is_playing = false;
         this.autoplay_delay = 20;
+        this.round_speed = true;
+        this.round_delay = 100;
         this.hover_coordinate = [-1,-1];
         this.size = this.current_game.map.length;
 
@@ -329,12 +331,18 @@ class Veww {
             return;
         }
 
-        var num_turns_elapsed = Math.ceil((curr_time - this.last_turn_time) / this.autoplay_delay);
+        var num_turns_elapsed = Math.ceil(Math.max((curr_time - this.last_turn_time), 0) / this.autoplay_delay);
         this.last_turn_time += num_turns_elapsed * this.autoplay_delay;
         this.jump_to_turn(Math.min(this.current_turn + num_turns_elapsed, this.max_turns));
         this.render();
 
+
         if (this.current_turn < this.max_turns) {
+            // Update autoplay_delay if necessary
+            if (this.round_speed) {
+                this.autoplay_delay = this.round_delay / this.robin_per_round[this.current_round];
+            }
+
             this.anim_frame = requestAnimationFrame(this.render_autoplay_frame.bind(this));
         } else {
             this.stop_autoplay();
@@ -1081,8 +1089,37 @@ document.getElementById('btn_jump_start').onclick = function(){
 }
 
 document.getElementById('input_set_speed').oninput = function() {
-    veww.autoplay_delay = Math.pow(1000 / parseInt(this.value), 4.32817);
+    if (veww.round_speed) {
+        veww.round_delay = Math.pow(1000 / parseInt(this.value), 4.32817) * 20;
+    } else {
+        veww.autoplay_delay = Math.pow(1000 / parseInt(this.value), 4.32817);
+    }
 }
+
+Array.from(document.getElementById('radio_select_speed_control').children).forEach(function(elem) {
+    elem.children[0].onchange = function() {
+        if (this.value == 'rounds') {
+            veww.round_speed = true;
+            document.getElementById('radio_select_speed_control_turns').checked = false;
+            document.getElementById('radio_select_speed_control_rounds').checked = true;
+            document.getElementById('radio_select_speed_control_turns_c').classList.remove('active');
+            document.getElementById('radio_select_speed_control_rounds_c').classList.add('active');
+
+        } else if (this.value == 'turns') {
+            veww.round_speed = false;
+            document.getElementById('radio_select_speed_control_turns').checked = true;
+            document.getElementById('radio_select_speed_control_rounds').checked = false;
+            document.getElementById('radio_select_speed_control_turns_c').classList.add('active');
+            document.getElementById('radio_select_speed_control_rounds_c').classList.remove('active');
+        }
+
+        if (veww.round_speed) {
+            veww.round_delay = Math.pow(1000 / parseInt(document.getElementById('input_set_speed').value), 4.32817) * 20;
+        } else {
+            veww.autoplay_delay = Math.pow(1000 / parseInt(document.getElementById('input_set_speed').value), 4.32817);
+        }
+    }
+});
 
 Array.from(document.getElementById('radio_select_input_type').children).forEach(function(elem) {
     elem.children[0].onchange = function() {
@@ -1091,11 +1128,19 @@ Array.from(document.getElementById('radio_select_input_type').children).forEach(
             document.getElementById('input_range_set_round').parentElement.classList.add('hidden');
             document.getElementById('input_set_turn').parentElement.classList.remove('hidden');
             document.getElementById('input_set_round').parentElement.classList.remove('hidden');
+            document.getElementById('radio_select_input_type_number').checked = true;
+            document.getElementById('radio_select_input_type_range').checked = false;
+            document.getElementById('radio_select_input_type_number_c').classList.add('active');
+            document.getElementById('radio_select_input_type_range_c').classList.remove('active');
         } else if (this.value == 'range') {
             document.getElementById('input_set_turn').parentElement.classList.add('hidden');
             document.getElementById('input_set_round').parentElement.classList.add('hidden');
             document.getElementById('input_range_set_turn').parentElement.classList.remove('hidden');
             document.getElementById('input_range_set_round').parentElement.classList.remove('hidden');
+            document.getElementById('radio_select_input_type_number').checked = false;
+            document.getElementById('radio_select_input_type_range').checked = true;
+            document.getElementById('radio_select_input_type_number_c').classList.remove('active');
+            document.getElementById('radio_select_input_type_range_c').classList.add('active');
         }
     }
 });

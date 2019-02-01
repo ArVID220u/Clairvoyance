@@ -1,3 +1,13 @@
+# Fork Details
+
+Updated for Battlecode 2019 Final Tournament.
+
+- Ability to load replays from a directory and navigate between them easily.
+- Team names visible.
+- Total turn and round count can be hidden.
+- Moved health bars and other things to make view area as big as possible.
+- Speed follows round count by default.
+
 # Clairvoyance
 
 An unofficial, offline replay viewer for Battlecode 2019

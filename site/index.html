@@ -54,6 +54,20 @@
 
         <div id='health'>
             <div class='row'>
+                <div class='col-auto' style='color: rgba(0,0,0,0);'>Red</div>
+                <div class='col-5 align-self-center'>
+                    <div class='team-label' id='replay_red_team'>
+                        Red Team
+                    </div>
+                </div>
+                <div class='col-5 align-self-center'>
+                    <div class='team-label' id='replay_blue_team'>
+                        Blue Team
+                    </div>
+                </div>
+                <div class='col-auto' style='color: rgba(0,0,0,0);'>Blue</div>
+            </div>
+            <div class='row'>
                 <div class='col-auto'>Red</div>
                 <div class='col-5 align-self-center'>
                     <div class="progress" style='height:15px; flex-direction: row-reverse;'>
@@ -151,8 +165,6 @@
                 <p>Path: <span id='replay_path' class='dyn_val'>/my/replay/path/replay.bc19</span></p>
                 <p>Seed: <span id='replay_seed' class='dyn_val'>1337</span></p>
                 <button id='btn_next_replay' type="button" class="btn btn-primary btn-sm">Next Replay</button>
-                <p>Red: <span id='replay_red_team' class='dyn_val'>red team</span></p>
-                <p>Blue: <span id='replay_blue_team' class='dyn_val'>blue team</span></p>
             </div>
 
             <hr/>

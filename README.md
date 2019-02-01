@@ -1,5 +1,3 @@
-# Fork Details
-
 Updated for Battlecode 2019 Final Tournament.
 
 - Ability to load replays from a directory and navigate between them easily.

@@ -1121,6 +1121,36 @@ Array.from(document.getElementById('radio_select_speed_control').children).forEa
     }
 });
 
+Array.from(document.getElementById('radio_total_counts').children).forEach(function(elem) {
+    elem.children[0].onchange = function() {
+        if (this.value == 'show') {
+            document.getElementById('radio_total_counts_hide').checked = false;
+            document.getElementById('radio_total_counts_show').checked = true;
+            document.getElementById('radio_total_counts_hide_c').classList.remove('active');
+            document.getElementById('radio_total_counts_show_c').classList.add('active');
+
+            var total_labels = document.getElementsByClassName('total_count_label');
+
+            for (var i = 0; i < total_labels.length; i++) {
+                total_labels[i].style.display = 'inline';
+            }
+        } else if (this.value == 'hide') {
+            document.getElementById('radio_total_counts_hide').checked = true;
+            document.getElementById('radio_total_counts_show').checked = false;
+            document.getElementById('radio_total_counts_hide_c').classList.add('active');
+            document.getElementById('radio_total_counts_show_c').classList.remove('active');
+
+            
+            var total_labels = document.getElementsByClassName('total_count_label');
+
+            for (var i = 0; i < total_labels.length; i++) {
+                total_labels[i].style.display = 'none';
+            }
+        }
+
+    }
+});
+
 Array.from(document.getElementById('radio_select_input_type').children).forEach(function(elem) {
     elem.children[0].onchange = function() {
         if (this.value == 'number') {
@@ -1172,6 +1202,7 @@ document.getElementById('input_range_set_round').oninput = function() {
     veww.jump_to_round_robin(round, 1);
     veww.render();
 }
+
 
 document.getElementById('btn_switch_bc19_version').onclick = function(){
     var version = document.getElementById('select_bc19_version').value;

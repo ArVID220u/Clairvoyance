@@ -186,7 +186,7 @@
                     <button id='btn_prev_turn' type="button" class="btn btn-primary btn-sm">&lt; Prev</button>
                 </div>
                 <div class='col-5 align-self-center'>
-                    <p class='no-margin text-center'><span id='game_curr_turn' class='dyn_val'>0</span> / <span id='game_max_turns'>0</span></p>
+                    <p class='no-margin text-center'><span id='game_curr_turn' class='dyn_val'>0</span><span class='total_count_label'> / <span id='game_max_turns'>0</span></span></p>
                 </div>
                 <div class='col-auto'>
                     <button id='btn_next_turn' type="button" class="btn btn-primary btn-sm">Next &gt;</button>
@@ -201,7 +201,7 @@
                     <button id='btn_prev_round' type="button" class="btn btn-primary btn-sm">&lt; Prev</button>
                 </div>
                 <div class='col-5 align-self-center'>
-                    <p class='no-margin text-center'><span id='game_curr_round' class='dyn_val'>0</span> / <span id='game_max_rounds'>0</span></p>
+                    <p class='no-margin text-center'><span id='game_curr_round' class='dyn_val'>0</span><span class='total_count_label'> / <span id='game_max_rounds'>0</span></span></p>
                 </div>
                 <div class='col-auto'>
                     <button id='btn_next_round' type="button" class="btn btn-primary btn-sm">Next &gt;</button>
@@ -216,12 +216,31 @@
                     <button id='btn_prev_robin' type="button" class="btn btn-primary btn-sm">&lt; Prev</button>
                 </div>
                 <div class='col-5 align-self-center'>
-                    <p class='no-margin text-center'><span id='game_curr_robin' class='dyn_val'>0</span> / <span id='game_max_robins'>0</span></p>
+                    <p class='no-margin text-center'><span id='game_curr_robin' class='dyn_val'>0</span><span class='total_count_label'> / <span id='game_max_robins'>0</span></span></p>
                 </div>
                 <div class='col-auto'>
                     <button id='btn_next_robin' type="button" class="btn btn-primary btn-sm">Next &gt;</button>
                 </div>
             </div>
+
+            <div class='row pad-row'>
+                <div class='col-auto px-0'>
+                    <div class="btn-group btn-group-toggle btn-group-sm mb-0" id="radio_total_counts" data-toggle="buttons">
+                        <label class="btn btn-primary active" id='radio_total_counts_show_c'>
+                            <input type="radio" name="radio_total_counts" id='radio_total_counts_show' value="show" autocomplete="off" checked='true'>
+                            Show
+                        </label>
+                        <label class="btn btn-primary" id='radio_total_counts_hide_c'>
+                            <input type="radio" name="radio_total_counts" id='radio_total_counts_hide' value="hide" autocomplete="off">
+                            Hide
+                        </label>
+                    </div>
+                </div>
+                <div class='col-auto pl-2 align-self-center'>
+                    <p class='no-margin'>total counts</p>
+                </div>
+            </div>
+
 
             <hr/>
 

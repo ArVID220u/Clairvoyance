@@ -209,6 +209,7 @@ app.get('/set_replay_directory', function(req, res) {
     if (fs.existsSync(fpath) && fs.existsSync(fpath + '/metadata.json')) {
     //if (fs.existsSync(fpath)) {
         directory_path = fpath;
+        directory_count = 0;
         used_path = 'directory';
         res.sendStatus(200);
     } else {

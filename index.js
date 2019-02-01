@@ -140,6 +140,7 @@ app.get('/previous_replay_in_directory', function(req, res) {
 app.get('/replay_metadata', function(req, res) {
     if (used_path != 'directory') {
         res.sendStatus(404);
+        return;
     }
     
     var metadatafile = directory_path + '/metadata.json';

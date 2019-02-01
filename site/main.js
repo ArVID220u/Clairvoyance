@@ -1010,7 +1010,10 @@ function load_replay() {
             resp.json().then(function(resp) {
                 document.getElementById('replay_red_team').innerText = resp['redteam'][1];
                 document.getElementById('replay_blue_team').innerText = resp['blueteam'][1];
+                document.getElementById('replay_navigation').style.display = 'block';
             });
+        } else {
+            document.getElementById('replay_navigation').style.display = 'none';
         }
     });
 }

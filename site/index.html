@@ -164,7 +164,23 @@
             <div class='display-panel'>
                 <p>Path: <span id='replay_path' class='dyn_val'>/my/replay/path/replay.bc19</span></p>
                 <p>Seed: <span id='replay_seed' class='dyn_val'>1337</span></p>
-                <div id='replay_navigation' style='height: 30px; display: none;'>
+
+
+                <div id='replay_navigation' style='height: 80px; display: none;'>
+
+                    <div class='row pad-row'>
+                        <div class='col-3 align-self-center'>
+                            <p class='no-margin'>Set Replay Index:</p>
+                        </div>
+                        <div class='col-7'>
+                            <div class="input-group input-group-sm mb-0">
+                                <input id='input_set_directory_index' type="number" class="form-control" placeholder="Index">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" id="btn_set_directory_index">Go</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class='col-5234234' style='float: left; margin-top: 5px;'>
                         <button id='btn_previous_replay' type="button" class="btn btn-primary btn-sm">Previous Replay</button>
                     </div>
@@ -224,6 +240,9 @@
             </div>
 
             <div class='row pad-row'>
+                <div class='col-auto pr-2 align-self-center'>
+                    <p class='no-margin'></p>
+                </div>
                 <div class='col-auto px-0'>
                     <div class="btn-group btn-group-toggle btn-group-sm mb-0" id="radio_total_counts" data-toggle="buttons">
                         <label class="btn btn-primary active" id='radio_total_counts_show_c'>

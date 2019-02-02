@@ -1183,6 +1183,18 @@ document.getElementById('btn_set_turn').onclick = function(){
     }
 }
 
+document.getElementById('btn_set_directory_index').onclick = function(){
+
+    
+    var index = document.getElementById('input_set_directory_index').value;
+
+    fetch('/set_replay_directory_index' + '?x=' + index).then(function(resp) {
+        if (resp.ok) {
+            load_replay();
+        }
+    });
+}
+
 document.getElementById('input_range_set_turn').oninput = function() {
     var turn = parseInt(this.value);
     veww.jump_to_turn(turn);

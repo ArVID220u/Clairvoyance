@@ -124,6 +124,29 @@ app.get('/next_replay_in_directory', function(req, res) {
 
     res.sendStatus(200);
 });
+
+app.get('/set_replay_directory_index', function(req, res) {
+    if (used_path != 'directory') {
+        res.sendStatus(404);
+    }
+
+    var index = parseInt(req.query.x);
+
+    directory_count = index;
+    
+    var metadatafile = directory_path + '/metadata.json';
+    var metadata = JSON.parse(fs.readFileSync(metadatafile, 'utf8'));
+
+    var leng = metadata['matches'].length;
+
+    if (directory_count >= leng) {
+        directory_count = leng-1;
+    }
+
+
+    res.sendStatus(200);
+});
+
 app.get('/previous_replay_in_directory', function(req, res) {
     if (used_path != 'directory') {
         res.sendStatus(404);
